@@ -1,0 +1,7 @@
+Process
+input a text containing lines of queries (e.g. music title and artist)
+query youtube for top links of each one
+download audio
+
+try to get it working first. in the future, you can use ytmusic
+to make this specifically work for music search and download
