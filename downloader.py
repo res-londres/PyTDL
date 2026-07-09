@@ -5,7 +5,8 @@ import yt_dlp
 class Downloader:
     @staticmethod
     def download_mp3(audio_metadata, dst='.', quiet=False):
-        title, url = audio_metadata.values()
+        title, url = audio_metadata
+
         ydl_opts = {
             'format': 'bestaudio/best',
             'outtmpl': f'{dst}/%(title)s.%(ext)s',
@@ -15,6 +16,7 @@ class Downloader:
                 'preferredquality': '192',
             }],
             'quiet': True,
+            'no_warnings': True,
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             if not quiet:
@@ -22,7 +24,7 @@ class Downloader:
             ydl.download([url])
 
     @staticmethod
-    def download_mp3s(audio_metadata, dst='.', quiet=False):
+    def download_mp3_mult(audio_metadata, dst='.', quiet=False):
         with ThreadPoolExecutor(max_workers=5) as executor:
             executor.map(
                 Downloader.download_mp3, audio_metadata,
