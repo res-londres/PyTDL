@@ -4,7 +4,6 @@ def search_yt(query):
     # returns info of top yt search result
     ydl_opts = {
         'default_search': 'ytsearch1:',
-        'format': 'bestaudio/best',
         'noplaylist': True,
         'quiet': True,
     }
@@ -12,14 +11,13 @@ def search_yt(query):
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         result = ydl.extract_info(query, download=False)
         top_result = result['entries'][0]
-        print(top_result)
         return top_result
 
 if __name__ == '__main__':
     # test
     query = input('search for video: ')
-    search_yt(query)
-
+    result = search_yt(query)
+    print(result.get('webpage_url'))
 
 
 

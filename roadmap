@@ -5,3 +5,10 @@ download audio
 
 try to get it working first. in the future, you can use ytmusic
 to make this specifically work for music search and download
+
+Plan
+search_yt: search yt, return top result metadata
+download_mp3: take url, download mp3 (converted using ffmpeg)
+downloader class: take the queries and run threads
+main: use cmd like this: pytdl <txt file containing queries> [dst dir]
+
