@@ -1,5 +1,7 @@
-from concurrent.futures import ThreadPoolExecutor
 import itertools
+import os
+import sys
+from concurrent.futures import ThreadPoolExecutor
 
 import yt_dlp # type: ignore
 
@@ -8,9 +10,15 @@ class Downloader:
     def download_mp3(audio_metadata, dst='.', quiet=False):
         title, url = audio_metadata
 
+        if getattr(sys, 'frozen', False):
+            ffmpeg_path = os.path.join(getattr(sys, '_MEIPASS', '.'), 'ffmpeg')
+        else:
+            ffmpeg_path = 'ffmpeg'  
+
         ydl_opts = {
             'format': 'bestaudio/best',
             'outtmpl': f'{dst}/%(title)s.%(ext)s',
+            'ffmpeg_location': ffmpeg_path,
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
