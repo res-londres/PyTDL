@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 import itertools
+
 import yt_dlp
 
 class SearchYT:
@@ -13,7 +14,7 @@ class SearchYT:
             'no_warnings': True,
         }
 
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl: # type: ignore
             try:
                 result = ydl.extract_info(query, download=False)
             except:
@@ -22,7 +23,7 @@ class SearchYT:
                 return dict()
             if not quiet:
                 print(f'Found results for query "{query}"')
-            top_result = result['entries'][0]
+            top_result = result.get('entries', [None])[0]
             return top_result
 
     @staticmethod

@@ -1,6 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import itertools
-import yt_dlp
+
+import yt_dlp # type: ignore
 
 class Downloader:
     @staticmethod
@@ -18,7 +19,7 @@ class Downloader:
             'quiet': True,
             'no_warnings': True,
         }
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl: # type: ignore
             if not quiet:
                 print(f'Downloading: {title}...')
             ydl.download([url])
@@ -35,11 +36,11 @@ class Downloader:
 if __name__ == '__main__':
     # test
     dl = Downloader()
-    dl.download_mp3s(
+    dl.download_mp3_mult(
         [
-            {'title': 'X', 'url': 'https://www.youtube.com/watch?v=HSSWn3wiRlM'},
-            {'title': 'Y', 'url': 'https://www.youtube.com/watch?v=PRpiBpDy7MQ'},
-            {'title': 'Z', 'url': 'https://www.youtube.com/watch?v=flF5aU1iZFo'},
+            ('X', 'https://www.youtube.com/watch?v=HSSWn3wiRlM'),
+            ('Y', 'https://www.youtube.com/watch?v=PRpiBpDy7MQ'),
+            ('Z', 'https://www.youtube.com/watch?v=flF5aU1iZFo'),
         ],
     )
 
