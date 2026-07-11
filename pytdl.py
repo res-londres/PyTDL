@@ -32,6 +32,7 @@ class PyTDL:
                 retry = input(f'{self._failed_downloads} downloads failed. Retry download? (y/n) ')
                 if retry.lower() == 'n':
                     break
+            break
         self._successful_downloads -= self._failed_downloads
         print(f'Download complete. {self._successful_downloads} successful downloads, {self._failed_downloads} failed downloads.')
         

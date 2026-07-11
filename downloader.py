@@ -13,7 +13,7 @@ class Downloader:
         if getattr(sys, 'frozen', False):
             ffmpeg_path = os.path.join(getattr(sys, '_MEIPASS', '.'), 'ffmpeg')
         else:
-            ffmpeg_path = 'ffmpeg'  
+            ffmpeg_path = '/usr/bin/ffmpeg'  
 
         ydl_opts = {
             'format': 'bestaudio/best',
