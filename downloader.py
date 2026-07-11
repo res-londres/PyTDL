@@ -11,9 +11,9 @@ class Downloader:
         title, url = audio_metadata
 
         if getattr(sys, 'frozen', False):
-            ffmpeg_path = os.path.join(getattr(sys, '_MEIPASS', '.'), 'ffmpeg')
+            ffmpeg_path = sys._MEIPASS  # type: ignore
         else:
-            ffmpeg_path = '/usr/bin/ffmpeg'  
+            ffmpeg_path = '/usr/bin' 
 
         ydl_opts = {
             'format': 'bestaudio/best',
@@ -29,7 +29,7 @@ class Downloader:
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl: # type: ignore
             if not quiet:
-                print(f'Downloading: {title}...')
+                print(f'Downloading: {title}')
             ydl.download([url])
 
     @staticmethod
